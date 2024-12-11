@@ -117,7 +117,7 @@ export function ChatInput({
         </div>
       </div>
       <p className="text-xs text-muted-foreground mt-2 text-center">
-        Code Capsule is code blocker generation and live UI Preview
+         Abyss is code blocker generation and live UI Preview
       </p>
     </form>
   )

@@ -4,3 +4,15 @@ export type LLMModel = {
     provider : string 
     providerId : string
 }
+
+export type LLMConfig = {
+    model? : string 
+    apiKey? : string 
+    baseURL? : string
+    temperature? : number
+    topP? : number
+    topK? : number
+    frequencyPenalty? : number 
+    presencePenalty? : number 
+    maxTokens? : number
+}

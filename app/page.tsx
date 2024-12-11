@@ -8,6 +8,9 @@ import { ChatInput } from '@/components/chat-input';
 import { useLocalStorage } from "usehooks-ts";
 import ChatPicker from '@/components/chat-picker';
 import modelsList from "@/lib/models.json"
+import templates from '@/lib/templates';
+import ChatSettings from '@/components/chat-settings';
+import { LLMConfig } from './models';
 const Home = () => {
   const [isAuthDialogOpen, setAuthDialog] = useState(false);
   const [authView, setAuthView] = useState<AuthViewType>("sign_in");
@@ -22,6 +25,9 @@ const Home = () => {
     supabase
       ? supabase.auth.signOut()
       : console.warn("Supabase is not initialized");
+  }
+  function handleLanguageModelChange(e : LLMConfig) {
+   setLanguageModel({...largeLanguageModel, ...e})
   }
   return (
     <main className='flex min-h-screen max-h-screen'>
@@ -52,8 +58,9 @@ const Home = () => {
       >
         <ChatPicker
           models={modelsList.models}
+          templates={templates as any}
         />
-
+       <ChatSettings apiConfigurable={true} baseURLConfigurable={true} languageModel={largeLanguageModel} onLanguageModeChange={handleLanguageModelChange}  />
       </ChatInput>
            
       </div>
