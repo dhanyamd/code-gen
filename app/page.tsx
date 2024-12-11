@@ -6,6 +6,8 @@ import { NavBar } from '@/components/Navbar';
 import Chat from '@/components/chat';
 import { ChatInput } from '@/components/chat-input';
 import { useLocalStorage } from "usehooks-ts";
+import ChatPicker from '@/components/chat-picker';
+import modelsList from "@/lib/models.json"
 const Home = () => {
   const [isAuthDialogOpen, setAuthDialog] = useState(false);
   const [authView, setAuthView] = useState<AuthViewType>("sign_in");
@@ -22,8 +24,9 @@ const Home = () => {
       : console.warn("Supabase is not initialized");
   }
   return (
+    <main className='flex min-h-screen max-h-screen'>
     <div className='grid w-full md:grid-cols-2'>
-      <div>
+      <div className='flex flex-col w-full max-w-[800px] mx-auto px-4 overflow-auto col-span-2'>
       <NavBar 
        session={session}
        showLogin={() => setAuthDialog(true)}
@@ -38,7 +41,6 @@ const Home = () => {
       <ChatInput
       isLoading={false}
       input={chatInput}
-      handleChangeEvent={() => {}}
       handleSubmit={() => {}}
       handleFileChange={() => {}}
       files={files}
@@ -46,12 +48,17 @@ const Home = () => {
       retry={() => {}}
       isMultiModal={false}
       stop={() => {}}
+      handleInputEvent={() => {}}
+      >
+        <ChatPicker
+          models={modelsList.models}
+        />
 
-      />
-      <h1>Children component</h1>
+      </ChatInput>
+           
       </div>
-      
     </div>
+    </main>
   )
 }
 
